@@ -17,7 +17,7 @@ def preprocess_image(image_path):
 
 # ニューラルネットワーク→元の画像に戻すための処理（前処理の逆変換）
 # VGG19がCaffeモードの前処理なのでちょっと複雑
-def decompress_image(x):
+def deprocess_image(x):
     img = x.reshape((IMG_HEIGHT, IMG_WIDTH, 3))
     # 平均を0にしているのを戻す
     img[:, :, 0] += 103.939
@@ -182,7 +182,7 @@ def main(base_image_path, style_reference_image_path, content_weight, output_dir
             continue
         print('Current loss value:', min_val)
         # 生成された画像の保存
-        img = decompress_image(x.copy()) # ここでコピーするのが大事
+        img = deprocess_image(x.copy()) # ここでコピーするのが大事
         save_image(dest_dir=output_dir, image_array=img, iter=i)
         end_time = time.time()
         print('Iteration %d completed in %ds' % (i, end_time - start_time))
