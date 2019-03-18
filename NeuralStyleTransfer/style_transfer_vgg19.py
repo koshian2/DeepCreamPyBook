@@ -11,7 +11,7 @@ IMG_WIDTH, IMG_HEIGHT = 256, 256
 
 # 入力→ニューラルネットワークの前処理（KerasのVGG19はCaffeモードでの前処理）
 def preprocess_image(image_path):
-    img = np.asarray(Image.open(image_path).convert("RGB").resize((IMG_HEIGHT, IMG_WIDTH)))
+    img = np.asarray(Image.open(image_path).convert("RGB").resize((IMG_WIDTH, IMG_HEIGHT)))
     img = np.expand_dims(img, axis=0)
     return vgg19.preprocess_input(img)
 
