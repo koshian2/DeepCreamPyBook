@@ -114,7 +114,7 @@ def VGG16(input_shape, cnt,
     return model
 
 def extract_vgg_features(input_tensor, input_shape, cnt):
-    # とりあえずモデルを作る（名前衝突を避けるために独自にVGGを定義する）
+    # VGGモデルの作成（レイヤーの名前衝突を避けるためにカウンターを入れる）
     model = VGG16(input_shape, cnt)
     # グラフを組み直す
     x = input_tensor
