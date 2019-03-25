@@ -2,7 +2,7 @@ import torchvision
 from scipy.io import loadmat
 import numpy as np
 import matplotlib.pyplot as plt
-from mask import MaskGenerator
+from libs.mask import MaskGenerator
 
 def load_svhn():
     # データをダウンロードするためにTorchVisionを使う
