@@ -202,5 +202,5 @@ def convert_to_pred_model():
 
 if __name__ == "__main__":
     K.clear_session()
-    #train()
-    convert_to_pred_model()
+    train()
+    #convert_to_pred_model()
