@@ -4,7 +4,7 @@ import tensorflow.keras.backend as K
 class LossLayer(Layer):
     """
     損失関数の値を計算するレイヤー
-    Input：入力マスク画像、入力真の画像、予測画像
+    Input：入力マスク画像、入力真の画像、予測画像、VGGの特徴量
     Output：予測画像＋損失値の合成
     """
 
