@@ -54,7 +54,7 @@ def output_activation(input):
 def create_model():
     input_image = layers.Input((64,64,3))
     input_mask = layers.Input((64,64,3))
-    input_grandtruth = layers.Input((64,64,3))
+    input_groundtruth = layers.Input((64,64,3))
     ## メインのCNN
     # Encoder
     conv, mask = conv_bn_relu(input_image, input_mask, 128, 3, downsampling=2) # 32x32
@@ -68,19 +68,19 @@ def create_model():
     ## 損失関数（VGGの扱いが大変なのでモデル内で損失値を計算する）
     # マスクしていない部分の真の画像＋マスク部分の予測画像
     y_comp = layers.Lambda(lambda inputs: inputs[0]*inputs[1] + (1-inputs[0])*inputs[2])(
-        [input_mask, input_grandtruth, conv])
+        [input_mask, input_groundtruth, conv])
     # vggの特徴量
     vgg_pred_1, vgg_pred_2, vgg_pred_3 = extract_vgg_features(conv, (64,64,3), 0)
-    vgg_true_1, vgg_true_2, vgg_true_3 = extract_vgg_features(input_grandtruth, (64,64,3), 1)
+    vgg_true_1, vgg_true_2, vgg_true_3 = extract_vgg_features(input_groundtruth, (64,64,3), 1)
     vgg_comp_1, vgg_comp_2, vgg_comp_3 = extract_vgg_features(y_comp, (64,64,3), 2)
     # 画像＋損失
     join = LossLayer()([input_mask, 
-                        conv, input_grandtruth, y_comp,
+                        conv, input_groundtruth, y_comp,
                         vgg_pred_1, vgg_pred_2, vgg_pred_3,
                         vgg_true_1, vgg_true_2, vgg_true_3,
                         vgg_comp_1, vgg_comp_2, vgg_comp_3])
     # lossやmetricsの表示がうまくいかないので出力は1つにする
-    return Model([input_image, input_mask, input_grandtruth], join)
+    return Model([input_image, input_mask, input_groundtruth], join)
 
 # 損失関数側だけ取る
 def identity_loss(y_true, y_pred):
