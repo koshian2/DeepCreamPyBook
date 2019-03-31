@@ -23,6 +23,7 @@ def load_color_images(image_directory, use_cache_file=True):
     images = sorted(images) # 環境によってglobの順番が維持されないので順番保証
     result = []
     # カラー画像のみ抽出
+    print("カラー画像のみを抽出…")
     for path in tqdm(images):
         try:
             with Image.open(path) as img:
@@ -66,7 +67,7 @@ def tile_images(save_path, x1, x2, title):
     assert x1.dtype == np.uint8 and x2.dtype == np.uint8
     assert x1.ndim == 4 and x2.ndim == 4
     plt.clf()
-    plt.figure(figsize=(7,7))
+    plt.figure(figsize=(8,8))
     plt.subplots_adjust(hspace=0.02, wspace=0.02, 
                         top=0.92, bottom=0.02, left=0.02, right=0.98)
     def plot_ax(ax, img):
