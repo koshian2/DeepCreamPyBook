@@ -46,21 +46,6 @@ def load_wifus_data(image_directory):
     train, test = train_test_split(img_paths, test_size=0.2, random_state=114514)
     return train, test
 
-# 前処理
-def preprocess_inputs(input):
-    assert input.ndim == 4
-    x = input / 127.5 - 1.0
-    x = np.clip(x, -1.0, 1.0)
-    return x
-
-# 前処理の逆
-def deprocess_inputs(input):
-    assert input.ndim == 4
-    assert input.dtype == np.float32
-    x = (input + 1.0) * 127.5
-    x = np.clip(x, 0, 255.0).astype(np.uint8)
-    return x
-
 # 画像を並べてプロットして保存
 def tile_images(save_path, x1, x2, title):
     assert x1.shape[0] == 32 and x2.shape[0] == 32
