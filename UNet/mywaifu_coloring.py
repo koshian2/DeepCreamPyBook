@@ -86,8 +86,8 @@ def create_unet():
     return model
 
 def jointed_loss(y_true, y_pred):
-    # 合成損失関数＝色差（CrCb）の損失関数＋RGBの損失関数
-    # 色差の損失関数　→　YCrCbのCrCbのL1距離
+    # 合成損失関数＝色差（CbCr）の損失関数＋RGBの損失関数
+    # 色差の損失関数　→　YCbCrのCbCrのL1距離
     ycbcr_convert_matrix = K.variable(RGB2YCbCr)
     ycbcr_true = K.dot(y_true, ycbcr_convert_matrix)
     ycbcr_pred = K.dot(y_pred, ycbcr_convert_matrix)
