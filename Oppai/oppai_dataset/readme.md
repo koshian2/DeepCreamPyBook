@@ -17,7 +17,7 @@ Pixivから4200枚超の「おっぱい」イラストをダウンロードし�
 
 ## 想定される使い方
 * 物体検出。Object Detectionならぬ**Oppai Detection**。
-* Partial Convolutionによる**謎の光**の復元
+* [Partial Convolution](https://arxiv.org/abs/1804.07723)による**謎の光**の復元
 
 ## 注意点
 * 全て全年齢対象のイラストからなる。R-18イラストは含まれない。
