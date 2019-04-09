@@ -21,25 +21,25 @@ Pixivから4200枚超の「おっぱい」イラストをダウンロードし�
 ### Colabの場合
 **Subversion**をインストールする
 
-```python
+```
 !apt install subversion
 ```
 
 「おっぱいデータセット」のリポジトリをコピーする
 
-```python
+```
 !svn export https://github.com/koshian2/DeepCreamPyBook/trunk/Oppai/oppai_dataset --force
 ```
 
-**[pixivpy](https://github.com/upbit/pixivpy)**をインストールする
+[pixivpy](https://github.com/upbit/pixivpy)をインストールする
 
-```python
+```
 !pip install pixivpy --upgrade
 ```
 
 画像をダウンロードする
 
-```python
+```
 from oppai_dataset.download_images import *
 
 set_login_attribute("your pixiv user id", "your pixiv password") # ここにID名、パスワードを入力する
@@ -50,8 +50,8 @@ download_all(session, "oppai_dataset/oppai_meta.json")
 画像は、「**oppai_dataset/images**」に保存される。
 
 * PixivIDの確認方法は、「Pixivのユーザー画面→基本設定→pixiv ID」から。
-* login()関数を何度もたたくとログイン履歴がたまり、その分登録メールアドレスにログインメールが大量に送られるので注意すること。
-* セッションは1時間程度で有効期限が切れるので（2019年4月現在）、失効したら再ログインすること
+* login()関数を何度もたたくとログイン履歴がたまり、その分登録メールアドレスにログインメールが大量に送られるので注意。
+* セッションは1時間程度で有効期限が切れるので（2019年4月現在）、失効したら再ログインする。
 
 ## 想定される使い方
 * 物体検出。Object Detectionならぬ**Oppai Detection**。
