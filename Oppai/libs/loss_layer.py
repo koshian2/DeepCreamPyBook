@@ -29,11 +29,12 @@ class LossLayer(Layer):
         l4 = loss_style(vgg_out, vgg_gt)
         l5 = loss_style(vgg_comp, vgg_gt)
         l6 = loss_tv(mask, y_comp)
+        l7 = loss_prewitt(mask, y_true, y_pred)
 
         # 全体の損失関数
         #total_loss = l1 + 6*l2 + 0.05*l3 + 120*(l4+l5) + 0.1*l6 # 論文通りの損失関数
         # VGGの特徴量のカラースケールが違うので比重を変える
-        total_loss = 10*l1 + 60*l2 + 0.05*l3 + 1*(l4+l5) + 1*l6
+        total_loss = 10*l1 + 60*l2 + 0.005*l3 + 1*(l4+l5) + 0.1*l6
 
         # (batch,H,W,1)のテンソルを作る
         ones = K.sign(K.abs(y_pred) + 1) # (batch,H,W,3)のすべて1のテンソル
@@ -63,7 +64,7 @@ def loss_perceptual(vgg_out, vgg_gt, vgg_comp):
     for o, c, g in zip(vgg_out, vgg_comp, vgg_gt):
         loss += l1(o, g) + l1(c, g)
     return loss
-        
+
 def loss_style(output, vgg_gt):
     """Style loss based on output/computation, used for both eq. 4 & 5 in paper"""
     loss = 0
