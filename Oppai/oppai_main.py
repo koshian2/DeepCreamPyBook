@@ -276,5 +276,5 @@ def plot_results():
 
 if __name__ == "__main__":
     K.clear_session()
-    #train()
-    plot_results()
+    train()
+    #plot_results()
